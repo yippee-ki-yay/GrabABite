@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2016-02-04 20:57:23
+  duration: 2016-02-04 20:57:23
+  restaurant_id: 
+  table_id: 
+
+two:
+  start_date: 2016-02-04 20:57:23
+  duration: 2016-02-04 20:57:23
+  restaurant_id: 
+  table_id: 
