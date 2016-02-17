@@ -1,0 +1,62 @@
+
+<%= javascript_include_tag "home.js" %>
+<h3>Go on, find some friends and eat shit together</h3>
+<hr />
+
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+        <h3>All the friends you have</h3>
+        
+        <table class="table table-striped" id="friends_table_id">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Lastname</th>
+        <th>Vists</th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @my_friends.each do |u| %>
+        <tr class="info">
+            <td><%= u.email %></td>
+            <td><%= u.email %></td>
+            <td><%= u.email %></td>
+            <td><button class="btn btn-danger dump_friend">Dump</button></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+    </div>
+    
+    <div class="col-md-4 col-md-offset-2">
+        <h4>Find some new friends</h4>
+        
+        <div class="col-md-6">
+            <input type="text">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary">Search</button>
+        </div>
+        
+        <table class="table" id="user_table_id">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @future_friends.each do |u| %>
+        <tr class="success">
+            <td><%= u.email %></td>
+            <td><button class="btn btn-success add_friend">Add friend</button></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+    </div>
+    
+</div>
+</div>

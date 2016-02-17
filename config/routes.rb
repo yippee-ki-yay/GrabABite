@@ -4,7 +4,26 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
     resources :restaurants
-    resources :home
+    
+    resources :home do
+        collection do
+            get 'friends'
+            get 'profile'
+            get 'restaurants_reserve'
+            post 'add_friend'
+            post 'dump_friend'
+        end
+    end
+    
+  devise_scope :user do
+  authenticated :user do
+    root 'home#index', as: :authenticated_root
+  end
+
+  unauthenticated do
+    root 'devise/sessions#new', as: :unauthenticated_root
+  end
+end
     
     post "restaurants/create"
     
