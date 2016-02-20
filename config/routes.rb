@@ -3,8 +3,15 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-    resources :restaurants
+  resources :restaurants
     
+  
+  resources :managers do
+    collection do
+      get 'index'
+    end
+  end
+  
     resources :home do
         collection do
             get 'friends'
@@ -12,6 +19,14 @@ Rails.application.routes.draw do
             get 'restaurants_reserve'
             post 'add_friend'
             post 'dump_friend'
+        end
+    end
+    
+  #  devise_for :users, :controllers => {:registrations => "registrations"}
+    
+    resources :reservation do
+        collection do
+            get 'friends_to_visit'
         end
     end
     

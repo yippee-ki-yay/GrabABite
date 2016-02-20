@@ -1,10 +1,11 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
-
+    layout 'home'
   # GET /restaurants
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+   
   end
 
   # GET /restaurants/1
@@ -12,11 +13,21 @@ class RestaurantsController < ApplicationController
   def show
   end
 
+    def add_manager_restaurant
+      # n = User.new({email:"new@gmail.com", password:"12345678", password_confirmation:"12345678", firstname:"new", lastname:"newline"})
+
+  end
+
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
+    @available_managers = User.with_role("restaurant_manager")
   end
 
+  # POST adding a table to the restaurant
+  def add_table
+  end
+    
   # GET /restaurants/1/edit
   def edit
   end
@@ -25,7 +36,10 @@ class RestaurantsController < ApplicationController
   # POST /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
+    @restaurant.user_id = restaurant_params[:user_id]
+    
+    puts params.inspect
+    
     respond_to do |format|
       if @restaurant.save
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
@@ -69,6 +83,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :desc)
+      params.require(:restaurant).permit(:name, :address, :desc, :user_id)
     end
 end

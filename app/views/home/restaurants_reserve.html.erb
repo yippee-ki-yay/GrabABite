@@ -18,7 +18,8 @@
                 <td><%= u.name %></td>
                 <td><%= u.desc %></td>
                 <td><%= u.address %></td>
-                <td><button class="btn btn-success reserve">Reserve</button></td>
+                <% resrv =  "/reservation?id=" + u.id.to_s %>
+                <td><a href="<%= resrv%>" class="btn btn-success reserve">Reserve</a></td>
             </tr>
             <% end %>
         </tbody>

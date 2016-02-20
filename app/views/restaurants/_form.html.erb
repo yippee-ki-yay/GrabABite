@@ -1,29 +1,71 @@
-<%= form_for(@restaurant) do |f| %>
-  <% if @restaurant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
 
-      <ul>
-      <% @restaurant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="container">
+	<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+          <%= form_for(@restaurant) do |f| %>
+          <% if @restaurant.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br>
-    <%= f.text_field :desc %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                      <ul>
+                          <% @restaurant.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                      </ul>
+                </div>
+            <% end %>
+          <fieldset>
+            <legend class="text-center">Add a New Restaurant</legend>
+    
+            <!-- Name input-->
+            <div class="form-group field">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                  <%= f.text_field :name, class: "form-control" %>
+              </div>
+            </div>
+    
+            <!-- address input-->
+            <div class="form-group field">
+              <label class="col-md-3 control-label" for="address">Address</label>
+              <div class="col-md-9">
+                  <%= f.text_field :address, class:"form-control" %>
+                </div>
+              </div>
+              
+              <!-- description input-->
+            <div class="form-group field">
+              <label class="col-md-3 control-label" for="address">Description</label>
+              <div class="col-md-9">
+                  <%= f.text_field :desc, class:"form-control" %>
+                </div>
+              </div>
+
+            
+                <!--Choose manager -->
+              <div class="form-group field">
+                     <label class="col-md-3 control-label" >Manager: </label>
+                  <div class="col-md-9">
+                    <%= f.select "user_id", 
+options_from_collection_for_select(@available_managers, "id","email"), 
+                    { :include_blank => true }, 
+                    { :class => 'form-control' } %>
+                  </div>
+			  </div>
+            
+         
+    
+            <!-- Form actions -->
+            <div class="form-group actions">
+              <div class="col-md-12 text-right">
+                  <%= f.submit class:"btn btn-success"%>
+              </div>
+            </div>
+          </fieldset>
+          <% end %>
+        </div>
+          <%= link_to 'Back', restaurants_path %>
+      </div>
+	</div>
+</div>

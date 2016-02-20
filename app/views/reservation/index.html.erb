@@ -1,0 +1,46 @@
+
+
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Reservation for restaurant: <b><%= @curr_restaurant.name %></b></h3>
+			 	</div>
+			  	<div class="panel-body">
+                    <%= form_tag({controller: "reservation", action: "create"}, method: "post") %>
+                    <fieldset>
+                        <input type="hidden" id="restaurant_id", val="<%=@curr_restaurant.id %>">
+                        
+			    	  	<div class="form-group">
+			    		    <input class="form-control" placeholder="Choose a date" id="date" name="date" data-provide='datepicker'>
+			    		</div>
+			    		<div class="form-group">
+			    			<input class="form-control" placeholder="Duration in hours" id="duration" name="duration" type="number" value="">
+			    		</div>
+			    		<div class="form-group">
+                            <label>Select a table: </label>
+			    	        <select id="table_id" class="form-control" placeholder="Select a table">
+                                <%=options_for_select(@available_tables) %>
+                            </select>
+			    	    </div>
+			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Continue">
+                       
+			    	</fieldset>
+                   
+			    </div>
+			</div>
+		</div>
+         <div class="gridster col-md-8">
+    <ul>
+        <li data-row="1" data-col="1" data-sizex="10" data-sizey="10">Blok1</li>
+        <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">Blok2</li>
+        <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">Bolok3</li>
+
+    </ul>
+	</div>
+    
+   
+</div>
+    
+</div>
