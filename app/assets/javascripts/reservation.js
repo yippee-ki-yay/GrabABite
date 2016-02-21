@@ -6,3 +6,11 @@ $(function(){ //DOM Ready
     }).data('gridster');
 
 });
+
+$(document).ready(function()
+{
+  $("#add_visit").click(function()
+  {
+    
+  });
+});

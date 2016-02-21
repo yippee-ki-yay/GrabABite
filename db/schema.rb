@@ -35,12 +35,10 @@ ActiveRecord::Schema.define(version: 20160218221034) do
     t.string   "name",       limit: 255
     t.string   "desc",       limit: 255
     t.string   "address",    limit: 255
+    t.string   "user_id",    limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.integer  "user_id",    limit: 4
   end
-
-  add_index "restaurants", ["user_id"], name: "index_restaurants_on_user_id", using: :btree
 
   create_table "restaurants_tables", id: false, force: :cascade do |t|
     t.integer "restaurant_id", limit: 4, null: false

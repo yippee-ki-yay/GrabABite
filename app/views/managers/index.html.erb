@@ -13,7 +13,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Restaurant</th>
-       
+            <th></th>
           </tr>
         </thead>
 
@@ -23,8 +23,8 @@
               <td><%= manager.firstname %></td>
               <td><%= manager.lastname %></td>
               <td><%= manager.email %></td>
-              <td><%= manager.restaurant_id %></td>
-            
+              <td><%= manager.restaurant.name %></td>
+              <td></td>
             </tr>
           <% end %>
         </tbody>

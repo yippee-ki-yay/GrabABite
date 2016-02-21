@@ -8,7 +8,7 @@ class ReservationController < ApplicationController
         @curr_restaurant = Restaurant.find(restaurant_id)
         
         #for now this is just getting all the tables
-        @available_tables = Table.pluck(:id, :name)
+      @available_tables = Table.pluck(:capacity, :id)
     end
     
     #we save to database restaurant visit/reservation
@@ -18,7 +18,7 @@ class ReservationController < ApplicationController
         table = params[:table]
         restaurant = params[:restaurant]
         
-        puts date
+         byebug
         
         @visit = Visit.new({start_date: date, duration: duration, table_id:table, restaurant_id:restaurant})
         @visit.save

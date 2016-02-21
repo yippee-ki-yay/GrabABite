@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
     
-    has_many :restaurant
+  belongs_to :restaurant
     
     has_many :user_visits
     

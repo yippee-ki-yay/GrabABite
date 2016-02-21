@@ -5,7 +5,8 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
-   
+   # @restaurants =User.joins(:restaurant)
+   # byebug
   end
 
   # GET /restaurants/1
@@ -13,19 +14,43 @@ class RestaurantsController < ApplicationController
   def show
   end
 
-    def add_manager_restaurant
-      # n = User.new({email:"new@gmail.com", password:"12345678", password_confirmation:"12345678", firstname:"new", lastname:"newline"})
 
+  #shows info about the restaurant
+  def managers_restaurant
+    if current_user.has_role? "restaurant_manager"
+      @managed_restaurant = current_user.restaurant
+      
+    end
   end
-
+  
+  # post adds a new table to the restaurant
+  def add_table
+    seats = params[:number_seats]
+    if current_user.has_role? "restaurant_manager"
+        table = Table.new
+        table.capacity = seats
+        table.save
+    
+      curr_restaurant = current_user.restaurant
+      curr_restaurant.tables.push table
+      
+      render json: true
+      
+    else
+      redner json: false
+    end
+    
+    
+  end
+  
+  #opens the screen where you can set up the configuration
+  def add_tables  
+  end
+  
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
     @available_managers = User.with_role("restaurant_manager")
-  end
-
-  # POST adding a table to the restaurant
-  def add_table
   end
     
   # GET /restaurants/1/edit
@@ -36,12 +61,13 @@ class RestaurantsController < ApplicationController
   # POST /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.user_id = restaurant_params[:user_id]
+    user = User.find(restaurant_params[:user_id])
     
-    puts params.inspect
     
     respond_to do |format|
       if @restaurant.save
+        user.restaurant_id = @restaurant.id
+        user.save
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
         format.json { render :show, status: :created, location: @restaurant }
       else

@@ -4,11 +4,10 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :name
       t.string :desc
       t.string :address
+      t.string :user_id
         
       t.timestamps null: false
     end
-      
-        add_reference :restaurants, :user, index: true
       
   end
 end

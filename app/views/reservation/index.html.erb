@@ -21,11 +21,12 @@
 			    		<div class="form-group">
                             <label>Select a table: </label>
 			    	        <select id="table_id" class="form-control" placeholder="Select a table">
-                                <%=options_for_select(@available_tables) %>
+                              <%=options_for_select( @available_tables) %>
                             </select>
 			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Continue">
-                       
+			    		<button class="btn btn-lg btn-success btn-block" type="button" id="add_visit" value="Continue">
+                          Continue
+                      </button>
 			    	</fieldset>
                    
 			    </div>

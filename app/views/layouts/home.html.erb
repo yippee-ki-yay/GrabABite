@@ -52,6 +52,10 @@
                         <li>
                           <%= link_to 'Add Restaurant Managers', managers_path %>
                         </li>
+                    <% elsif current_user.has_role? :restaurant_manager %>
+                         <li>
+                           <%= link_to 'Manage restaurants', managers_restaurant_restaurants_path %>
+                        </li>
                     <% else %>
                         <li>
                             <%= link_to 'Restaurants', restaurants_reserve_home_index_path %>

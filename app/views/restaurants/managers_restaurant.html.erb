@@ -1,0 +1,22 @@
+
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <h3>Manage your restaurant: <%= @managed_restaurant.name %></h3>
+    <div class="well">
+      <div class="form-group">
+      <label>Name: <%= @managed_restaurant.name %></label>
+        </div>
+      <div class="form-group">
+      <label>Address: <%= @managed_restaurant.address %></label>
+      </div>
+      <div class="form-group">
+      <label>Description: <%= @managed_restaurant.desc %></label>
+    </div>
+      
+      <a href="<%= add_tables_restaurants_path %>" class="btn btn-success" id="configuration">Add table</a>
+      <button class="btn btn-success" id="edit">Edit</button>
+    
+    </div>
+  </div>
+</div>

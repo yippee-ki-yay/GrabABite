@@ -3,12 +3,20 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :restaurants
+  resources :restaurants do
+    collection do
+      get 'managers_restaurant'
+      get 'add_tables'
+      post 'add_table'
+    end
+  end
+  
     
   
   resources :managers do
     collection do
       get 'index'
+      get 'new'
     end
   end
   
