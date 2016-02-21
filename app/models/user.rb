@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
     devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
     
+  
+  validates :password, presence: true, length: {minimum: 5, maximum: 120}, on: :create
+validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
+  
   belongs_to :restaurant
     
     has_many :user_visits

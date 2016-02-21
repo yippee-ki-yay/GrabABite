@@ -23,6 +23,25 @@ class RestaurantsController < ApplicationController
     end
   end
   
+  def menu
+    @menu = current_user.restaurant.items
+  end
+  
+  def add_item
+    name = params[:name]
+    desc = params[:desc]
+    price = params[:price]
+    
+    
+    item = Item.new({name: name, desc: desc, price: price})
+    item.save
+    
+    current_user.restaurant.items.push item
+    
+    render json: true
+    
+  end
+  
   # post adds a new table to the restaurant
   def add_table
     seats = params[:number_seats]
@@ -61,13 +80,10 @@ class RestaurantsController < ApplicationController
   # POST /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    user = User.find(restaurant_params[:user_id])
     
     
     respond_to do |format|
       if @restaurant.save
-        user.restaurant_id = @restaurant.id
-        user.save
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
         format.json { render :show, status: :created, location: @restaurant }
       else
@@ -80,15 +96,14 @@ class RestaurantsController < ApplicationController
   # PATCH/PUT /restaurants/1
   # PATCH/PUT /restaurants/1.json
   def update
-    respond_to do |format|
-      if @restaurant.update(restaurant_params)
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @restaurant }
-      else
-        format.html { render :edit }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
-      end
-    end
+     @restaurant.update(restaurant_params)
+        
+        if current_user.has_role? "restaurant_manager"
+          redirect_to managers_restaurant_restaurants_path
+        else
+          redirect_to restaurants_path
+        end
+      
   end
 
   # DELETE /restaurants/1

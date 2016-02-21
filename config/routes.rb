@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     collection do
       get 'managers_restaurant'
       get 'add_tables'
+      get 'menu'
       post 'add_table'
+      post 'add_item'
     end
   end
   
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
         collection do
             get 'friends'
             get 'profile'
+            get 'visits'
+            get 'invitations'
             get 'restaurants_reserve'
             post 'add_friend'
             post 'dump_friend'
@@ -35,6 +39,8 @@ Rails.application.routes.draw do
     resources :reservation do
         collection do
             get 'friends_to_visit'
+          post 'create'
+          post 'invite_friend'
         end
     end
     

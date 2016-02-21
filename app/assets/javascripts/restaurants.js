@@ -18,11 +18,6 @@ $(document).ready(function()
   $("#add_new_table").click(function()
   {
     
-    var date = $("#");
-    var duration = $("#");
-    var table_id = $("#");
-    var restaurant_id = $("#");
-    
      $.ajax({
              method: "POST",
               url: "/restaurants/add_table",
@@ -33,4 +28,29 @@ $(document).ready(function()
                    
                   });
   });
+  
+  
+   $("#add_item").click(function()
+  {
+    
+     var name = $("#item_name").val();
+     var desc = $("#item_desc").val();
+     var price = $("#item_price").val();
+     
+     $.ajax({
+             method: "POST",
+              url: "/restaurants/add_item",
+              data: {name: name, desc: desc, price: price}
+                })
+                  .done(function( msg ) 
+                  {
+                    
+                    $('#item_table tr:last').after('<tr><td>'+$("#item_name").val()+'</td><td>'+$("#item_desc").val()+'</td><td>'+$("#item_price").val()+'</td></tr>');
+       
+       $("#item_name").val("")
+                    $("#item_desc").val("");
+                    $("#item_price").val("");
+                  });
+  });
+  
 });

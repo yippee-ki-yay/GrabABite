@@ -18,6 +18,19 @@ ActiveRecord::Schema.define(version: 20160218221034) do
     t.integer "user_b", limit: 4, null: false
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "visit_id",   limit: 4
+    t.string   "added_by",   limit: 255
+    t.boolean  "accepted"
+    t.integer  "score",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+  add_index "invitations", ["visit_id"], name: "index_invitations_on_visit_id", using: :btree
+
   create_table "items", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.text     "desc",       limit: 65535
@@ -64,17 +77,6 @@ ActiveRecord::Schema.define(version: 20160218221034) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-
-  create_table "user_visits", force: :cascade do |t|
-    t.integer  "score",      limit: 4
-    t.integer  "visit_id",   limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "user_visits", ["user_id"], name: "index_user_visits_on_user_id", using: :btree
-  add_index "user_visits", ["visit_id"], name: "index_user_visits_on_visit_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -123,8 +125,6 @@ ActiveRecord::Schema.define(version: 20160218221034) do
   add_index "visits", ["restaurant_id"], name: "index_visits_on_restaurant_id", using: :btree
   add_index "visits", ["table_id"], name: "index_visits_on_table_id", using: :btree
 
-  add_foreign_key "user_visits", "users"
-  add_foreign_key "user_visits", "visits"
   add_foreign_key "visits", "restaurants"
   add_foreign_key "visits", "tables"
 end

@@ -1,0 +1,33 @@
+<h3>Invitations</h3>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      
+          <% @invitations.each do |inv| %>
+            <div class="well">
+            
+              <h3>Invitation to restaurant: <%= inv.restaurant.name %></h3>
+            <div class="form-group">
+              <label>Date: <%= inv.start_date %></label>
+              </div>
+            <div class="form-group">
+              <label>Duration: <%= inv.duration %></label>
+            </div>
+            <div class="form-group">
+              <label>Table seats: <%= inv.table.capacity %></label>
+          </div>
+            <div class="form-group">
+              <label>People who are going: </label>
+              <ul>
+              
+              </ul>
+            </div>
+
+            <a href="<%= add_tables_restaurants_path %>" class="btn btn-success" id="configuration">Accept</a>
+            <a href="<%= add_tables_restaurants_path %>" class="btn btn-success" id="configuration">Decline</a>
+
+          </div>
+          <% end %>
+       
+  </div>
+</div>
