@@ -1,6 +1,4 @@
 
-<h3>Go on, find some friends and eat shit together</h3>
-<hr />
 
 <div class="container">
 <div class="row">
@@ -11,8 +9,8 @@
     <thead>
       <tr>
         <th>Email</th>
-        <th>Lastname</th>
-        <th>Vists</th>
+        <th>First name</th>
+        <th>Last name</th>
           <th></th>
       </tr>
     </thead>
@@ -20,8 +18,8 @@
         <% @my_friends.each do |u| %>
         <tr class="info">
             <td><%= u.email %></td>
-            <td><%= u.email %></td>
-            <td><%= u.email %></td>
+          <td><%= u.firstname %></td>
+          <td><%= u.lastname %></td>
             <td><button class="btn btn-danger dump_friend">Dump</button></td>
         </tr>
         <% end %>

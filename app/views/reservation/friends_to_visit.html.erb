@@ -6,10 +6,10 @@
       <input type="hidden" id="visit_id" val="<%= @visit.id %>">
       <h3>Information about your reservation</h3>
       <div class="form-group">
-        <label>Date: <%= @visit.start_date %></label>
+        <label>Date: <%= @visit.start_date.strftime("%Y-%m-%d %H:%M") %></label>
         </div>
       <div class="form-group">
-        <label>duration: <%= @visit.duration %></label>
+        <label>duration: <%= @visit.duration.strftime("%H:%M") %></label>
       </div>
       <div class="form-group">
         <label>Table seats: <%= @visit.table.capacity %></label>
@@ -21,7 +21,7 @@
         </ul>
       </div>
       
-      <a href="<%= add_tables_restaurants_path %>" class="btn btn-success" id="configuration">Add reservation</a>
+      <a href="<%= visits_home_index_path  %>" class="btn btn-success" id="configuration">Finish reservation</a>
     
     </div>
   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218221034) do
+ActiveRecord::Schema.define(version: 20160222144818) do
 
   create_table "friends", id: false, force: :cascade do |t|
     t.integer "user_a", limit: 4, null: false
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160218221034) do
     t.integer  "table_id",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.datetime "end_date"
   end
 
   add_index "visits", ["restaurant_id"], name: "index_visits_on_restaurant_id", using: :btree

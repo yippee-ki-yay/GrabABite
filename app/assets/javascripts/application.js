@@ -20,3 +20,6 @@
 //= require bootstrap-datepicker
 //= require jquery.gridster.js
 //= require twitter/typeahead.min
+//= require rating
+//= require moment
+//= requre gridstack

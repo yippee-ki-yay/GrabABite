@@ -19,13 +19,18 @@ class HomeController < ApplicationController
   
     def visits
       @visits =  Visit.joins(:invitations).where("invitations.user_id = ? AND 
-invitations.accepted = false", current_user.id )
+invitations.accepted = true", current_user.id )
+      
+      @past = @visits.where("end_date < ?", Time.now)
+      
+      @upcoming = @visits.where("end_date > ?", Time.now)
+      
     end
   
     def invitations
       @invitations =  Visit.joins(:invitations).where("invitations.user_id = ? AND 
 invitations.accepted = false", current_user.id )
-
+      
     end
     
     #upravljas i dodajes frendove
@@ -61,5 +66,26 @@ invitations.accepted = false", current_user.id )
         
         render json: true
     end
+  
+    #get invite id and set it to accepted
+  def accept_invite
+    invite_id = params[:invite]
+    
+    inv = Invitation.find(invite_id)
+    inv.accepted = true
+    inv.save
+    
+    render json: true   
+  end
+  
+  #delete the invite record
+  def decline_invite
+    invite_id = params[:invite]
+    
+    i = Invitation.find(invite_id)
+    i.delete
+    
+    render json: true
+  end
     
 end

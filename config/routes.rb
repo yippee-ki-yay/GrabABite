@@ -31,6 +31,8 @@ Rails.application.routes.draw do
             get 'restaurants_reserve'
             post 'add_friend'
             post 'dump_friend'
+            post 'decline_invite'
+          post 'accept_invite'
         end
     end
     
@@ -41,6 +43,9 @@ Rails.application.routes.draw do
             get 'friends_to_visit'
           post 'create'
           post 'invite_friend'
+          get 'visit_done'
+          post 'rate_visit'
+          post 'is_reserved'
         end
     end
     

@@ -1,55 +1,89 @@
 
 <div class="container">
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8 col-md-offset-2">
         <h3>Upcoming</h3>
         
         <table class="table table-striped" id="friends_table_id">
     <thead>
       <tr>
+        <th>Restaurant</th>
         <th>Date</th>
         <th>Duration</th>
         <th>Table seats</th>
-          <th></th>
+        <th>Invited</th>
+        <th>Going</th>
       </tr>
     </thead>
     <tbody>
-        <% @visits.each do |u| %>
+        <% @upcoming.each do |u| %>
         <tr class="info">
-          <td><%= u.start_date %></td>
-          <td><%= u.duration %></td>
-          <td></td>
-            <td><button class="btn btn-danger dump_friend">Show friends</button></td>
+          <td><%= u.restaurant.name%></td>
+          <td><%= u.start_date.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= u.duration.strftime("%H:%M") %></td>
+          <td><%= u.table.capacity%></td>
+          
+          <td>
+            <% u.invitations.each do |k|%>
+            <% if k.accepted != nil %>
+              <%= k.user.firstname + ' ' + k.user.lastname + ', '%>
+            <% end %>
+           <% end %>
+        </td>
+            <td>
+            <% u.invitations.each do |k|%>
+              <% if k.accepted == true %>
+              <%= k.user.firstname + ' ' + k.user.lastname + ', '%>
+            <% end %>
+           <% end %>
+        </td>
         </tr>
         <% end %>
     </tbody>
   </table>
-    </div>
-    
-    <div class="col-md-6 ">
-        <h3>Past</h3>
       
-       <table class="table table-striped" id="friends_table_id">
+      <hr />
+         <h3>Finished visits</h3>
+        
+        <table class="table table-striped" id="friends_table_id">
     <thead>
       <tr>
+        <th>Restaurant</th>
         <th>Date</th>
         <th>Duration</th>
         <th>Table seats</th>
-          <th></th>
+        <th>Friends</th>
+        <th>Rate</th>
       </tr>
     </thead>
     <tbody>
-        <% @visits.each do |u| %>
+        <% @past.each do |u| %>
         <tr class="info">
-          <td><%= u.start_date %></td>
-          <td><%= u.duration %></td>
-          <td></td>
-            <td><button class="btn btn-danger dump_friend">Show friends</button></td>
+          <td><%= u.restaurant.name%></td>
+          <td><%= u.start_date.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= u.duration.strftime("%H:%M") %></td>
+          <td><%= u.table.capacity%></td>
+          
+          <td>
+            <% u.invitations.each do |k|%>
+              <% if k.accepted == true %>
+              <%= k.user.firstname + ' ' + k.user.lastname + ', '%>
+            <% end %>
+           <% end %>
+        </td>
+      <% if u.invitations.find_by_user_id(current_user.id).score == nil %>
+          <td><a href="<%= visit_done_reservation_index_path(visit_id: u.id)%>" class="btn btn-primary">Rate</a></td>
         </tr>
-        <% end %>
+      <% else %>
+        <td>Score <%= u.invitations.find_by_user_id(current_user.id).score %></td>
+      <% end %>
+      <% end %>
     </tbody>
   </table>
+      
     </div>
+    
+
     
 </div>
 </div>

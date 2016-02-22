@@ -16,9 +16,11 @@
  */
 *= require bootstrap-datepicker3
 *= require jquery.gridster.css
+*= require bootstrap
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
+*= require rating
 
 body{
     background: url(http://mymaplist.com/img/parallax/back.png);

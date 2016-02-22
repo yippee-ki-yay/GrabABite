@@ -45,6 +45,28 @@
             
         });
 
+        //accept invite
+        $(document).on('click', '.accept_invite', function()
+        {
+             $.ajax({
+                  method: "POST",
+                  url: "/home/accept_invite",
+                  data: "invite="+ $(this).attr("data-id")
+                })
+                  .done(function( msg ) {
+                    location.reload();
+             });
+        });
 
-
+        //decline invite
+        $(document).on('click', '.decline_invite', function(){
+             $.ajax({
+                  method: "POST",
+                  url: "/home/decline_invite",
+                  data: "invite="+ $(this).attr("data-id")
+                })
+                  .done(function( msg ) {
+                    location.reload();
+             });
+        });
     

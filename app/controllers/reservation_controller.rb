@@ -10,7 +10,30 @@ class ReservationController < ApplicationController
         #for now this is just getting all the tables
       @available_tables = Table.pluck(:capacity, :id)
     end
+  
     
+  def visit_done
+    visit_id = params[:visit_id]
+    
+    @visit = Visit.find(visit_id)
+    
+  end
+  
+  def rate_visit
+    inv = params[:inv]
+    rating = params[:rating]
+    
+    my_inv = Invitation.find(inv)
+    my_inv.score = rating
+    my_inv.save
+    
+    render json: true
+    
+  end
+  
+  def is_reserved
+  end
+  
   def invite_friend
     visit_id = params[:visit_id]
     user_email = params[:email]
@@ -21,7 +44,7 @@ class ReservationController < ApplicationController
     v.visit = visit
     v.user = User.find_by_email(user_email)
     
-    full_name = v.user.firstname + ' ' + v.user.lastname
+    full_name = current_user.firstname + ' ' + current_user.lastname
     
     v.accepted = false
     v.added_by = full_name
@@ -40,7 +63,10 @@ class ReservationController < ApplicationController
         table = params[:table]
         restaurant = params[:restaurant]
         
+      
         @visit = Visit.new({start_date: date, duration: duration, table_id:table, restaurant_id:restaurant})
+      byebug
+      @visit.end_date = @visit.start_date + duration.to_i.hours
         @visit.save
       
        u = Invitation.new

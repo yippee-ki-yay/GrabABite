@@ -9,13 +9,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead-addresspicker/0.1.4/typeahead-addresspicker.min.js"></script>
+  
       <title>GrabABite</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 
-    <style>body{color:black;}</style>
 
+
+    
 
 </head>
 
@@ -34,7 +40,55 @@
                 </button>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <% if user_signed_in? %>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <%= link_to 'Home', home_index_path %>
+                    </li>
+                    <%if current_user.has_role? :system_manager %>
+                        <li>
+                            <%= link_to 'Add Restaurants', restaurants_path %>
+                        </li>
+                        <li>
+                          <%= link_to 'Add Restaurant Managers', managers_path %>
+                        </li>
+                    <% elsif current_user.has_role? :restaurant_manager %>
+                         <li>
+                           <%= link_to 'Manage restaurants', managers_restaurant_restaurants_path %>
+                        </li>
+                    <% else %>
+                        <li>
+                            <%= link_to 'Restaurants', restaurants_reserve_home_index_path %>
+                        </li>
+                        <li>
+                            <%= link_to 'Friends', friends_home_index_path %>
+                        </li>
+                         <li>
+                             <%= link_to 'Profile', profile_home_index_path %>
+                        </li>
+                        <li>
+                            <%= link_to 'Reservations', visits_home_index_path %>
+                        </li>
+                         <li>
+                           <%= link_to 'Invitations', invitations_home_index_path %>
+                        </li>
+                    <%end %>
+                  
+                </ul>
+               
+                <div class="row">
+                    <div class="col-md-offset-8" style="color:white; padding-top:30px">
+                        <b>Hi there: <%= current_user.firstname%></b>
+                        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+                    </div>
+                     
+                </div>
+              <% end %>
+           
+                
+            </div>
+            <!-- /.navbar-collapse -->
             
                
             

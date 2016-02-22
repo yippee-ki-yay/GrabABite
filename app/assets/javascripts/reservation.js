@@ -8,6 +8,23 @@ $(function(){ //DOM Ready
 });
 
 
+  $(document).on("click", "#save_rating", function()
+  {
+    var rating = $('input[name=example]:checked', '#rating').val();
+    var inv = $(this).attr("data-id");
+      $.ajax({
+             method: "POST",
+              url: "/reservation/rate_visit",
+              data: {rating: rating, inv: inv }
+                })
+                  .done(function( msg ) 
+                  {
+                   window.location.replace("/home/visits");
+     });
+    
+  });
+
+
   $(document).on("click","#add_visit", function()
   {
     var d = $("#date").val();
