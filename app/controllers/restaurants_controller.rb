@@ -4,14 +4,22 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.all
-   # @restaurants =User.joins(:restaurant)
-   # byebug
+    if current_user.has_role? "system_manager"
+      @restaurants = Restaurant.all
+    else
+      redirect_to home_index_path
+    end
+   
   end
 
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    if current_user.has_role? "system_manager"
+
+    else
+      redirect_to home_index_path
+    end
   end
 
 
@@ -19,12 +27,17 @@ class RestaurantsController < ApplicationController
   def managers_restaurant
     if current_user.has_role? "restaurant_manager"
       @managed_restaurant = current_user.restaurant
-      
+    else
+      redirect_to home_index_path
     end
   end
   
   def menu
-    @menu = current_user.restaurant.items
+    if current_user.has_role? "restaurant_manager"
+      @menu = current_user.restaurant.items
+    else
+      redirect_to home_index_path
+    end
   end
   
   def add_item
@@ -70,12 +83,23 @@ class RestaurantsController < ApplicationController
   
   # GET /restaurants/new
   def new
-    @restaurant = Restaurant.new
-    @available_managers = User.with_role("restaurant_manager")
+    if current_user.has_role? "system_manager"
+      @restaurant = Restaurant.new
+      @available_managers = User.with_role("restaurant_manager")
+    else
+      redirect_to home_index_path
+    end
   end
     
   # GET /restaurants/1/edit
   def edit
+     if current_user.has_role? "system_manager"
+     
+     elsif current_user.has_role? "restaurant_manager"
+       
+     else
+      redirect_to home_index_path
+    end
   end
 
   # POST /restaurants
@@ -111,6 +135,10 @@ class RestaurantsController < ApplicationController
   # DELETE /restaurants/1
   # DELETE /restaurants/1.json
   def destroy
+    u = User.find_by_restaurant_id(@restaurant.id)
+    u.restaurant_id = nil
+    u.save
+    
     @restaurant.destroy
     respond_to do |format|
       format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }

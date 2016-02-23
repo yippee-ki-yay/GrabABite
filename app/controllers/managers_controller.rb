@@ -2,13 +2,20 @@ class ManagersController < ApplicationController
   layout 'home'
   
   def index
-    @managers = User.with_role("restaurant_manager")
-    
+    if current_user.has_role? "system_manager"
+      @managers = User.with_role("restaurant_manager")
+    else
+      redirect_to home_index_path
+    end
   end
   
   def new
-    @manager = User.new
-    @restaurants = Restaurant.all
+    if current_user.has_role? "system_manager"
+      @manager = User.new
+      @restaurants = Restaurant.all
+    else
+      redirect_to home_index_path
+    end
   end
   
    def create
@@ -29,13 +36,7 @@ class ManagersController < ApplicationController
     end
   end
   
-  def destroy
-    @manager.destroy
-    respond_to do |format|
-      format.html { redirect_to managers_path, notice: 'Restaurant was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  
   
   private
   

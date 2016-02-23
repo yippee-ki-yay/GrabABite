@@ -46,14 +46,20 @@
                    
                     <%if current_user.has_role? :system_manager %>
                         <li>
-                            <%= link_to 'Add Restaurants', restaurants_path %>
+                            <%= link_to 'Restaurants', restaurants_path %>
                         </li>
                         <li>
-                          <%= link_to 'Add Restaurant Managers', managers_path %>
+                          <%= link_to ' Restaurant Managers', managers_path %>
+                        </li>
+                         <li>
+                             <%= link_to 'Profile', profile_home_index_path %>
                         </li>
                     <% elsif current_user.has_role? :restaurant_manager %>
                          <li>
                            <%= link_to 'Manage restaurants', managers_restaurant_restaurants_path %>
+                        </li>
+                        <li>
+                             <%= link_to 'Profile', profile_home_index_path %>
                         </li>
                     <% else %>
                         <li>

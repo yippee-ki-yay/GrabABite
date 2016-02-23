@@ -35,10 +35,12 @@ class ReservationController < ApplicationController
   def get_tables
     
     rest_id = params[:rest_id]
-    r = Restaurant.find(rest_id)
+   
     
     if current_user.has_role? "restaurant_manager"
       r = Restaurant.find(current_user.restaurant_id)
+    else
+       r = Restaurant.find(rest_id)
     end
     
     respond_to do |format|

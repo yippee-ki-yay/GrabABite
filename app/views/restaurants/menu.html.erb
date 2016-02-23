@@ -1,7 +1,8 @@
 
 
 <div class="row">
-  <div class="col-md-4 well">
+  <div class="col-md-4">
+    <div class="well">
     <h3>Add Item to the menu</h3>
     <div class="form-group">
       <label>Name :</label>
@@ -9,14 +10,17 @@
     </div>
      <div class="form-group">
       <label>Description :</label>
-      <input class="form-control" type="text" id="item_desc" />
+       <textarea class="form-control" type="text" id="item_desc"></textarea>
     </div>
      <div class="form-group">
       <label>Price :</label>
       <input class="form-control" type="number" id="item_price" />
     </div>
     <button class="btn btn-success" type="button" id="add_item">Add item</button>
+   </div>
+     <%= link_to 'Back', managers_restaurant_restaurants_path %>
   </div>
+  
   
   <div class="col-md-6 col-md-offset-1 well">
     <h3>Restaurant menu</h3>

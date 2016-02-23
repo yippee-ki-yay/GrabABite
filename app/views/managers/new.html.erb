@@ -1,3 +1,84 @@
+<script>
+$(document).ready(function(){
+  $('form').submit(function () {
+
+    var isValid = true;
+    var email = $("#user_email");
+    var firstname = $("#user_firstname");
+     var lastname = $("#user_lastname");
+    var password = $("#user_password");
+    var password_confirm = $("#user_password_confirmation");
+    var restaurant = $( "#user_restaurant_id option:selected" ).text();
+    
+    if(email.val() == "")
+      {
+        isValid = false;
+        email.closest(".form-group").addClass("has-error");
+      }
+    else
+      email.closest(".form-group").removeClass("has-error");
+    
+      if(firstname.val() == "")
+      {
+        isValid = false;
+        firstname.closest(".form-group").addClass("has-error");
+      }
+     else
+      firstname.closest(".form-group").removeClass("has-error");
+    
+      if(lastname.val() == "")
+      {
+        isValid = false;
+        lastname.closest(".form-group").addClass("has-error");
+      }
+     else
+      lastname.closest(".form-group").removeClass("has-error");
+    
+      if(password.val() == "")
+      {
+        isValid = false;
+        password.closest(".form-group").addClass("has-error");
+      }
+     else
+      password.closest(".form-group").removeClass("has-error");
+    
+      if(password.val().length < 8)
+        {
+          toastr.error("Password must be over 8 characters long");
+          isValid = false;
+        }
+    
+      if(password_confirm.val() == "")
+      {
+        isValid = false;
+        password_confirm.closest(".form-group").addClass("has-error");
+      }
+     else
+      password_confirm.closest(".form-group").removeClass("has-error");
+    
+    if(restaurant == "")
+      {
+        isValid = false;
+        toastr.error("You must select a restaurant");
+      }
+   
+    
+    
+    if(password.val() != password_confirm.val())
+      {
+        isValid = false;
+        toastr.error("The passwords don't match");
+      }
+   
+    
+    return isValid;
+    
+});
+  
+});
+</script>
+
+
 <div class="container">
     <div class="row vertical-offset-100">
     	<div class="col-md-4 col-md-offset-4">
@@ -32,7 +113,7 @@
 			    		<div class="form-group field">
 			    			<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Password (minumum 8 characters)" %>
 			    		</div>
-                          <div class="field" style="padding-bottom:10px;">
+                          <div class="field form-group" style="padding-bottom:10px;">
                             <%= f.label :password_confirmation %><br />
                             <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
                           </div>

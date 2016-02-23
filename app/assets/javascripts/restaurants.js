@@ -37,6 +37,38 @@ $(document).ready(function()
      var desc = $("#item_desc").val();
      var price = $("#item_price").val();
      
+     var isValid = true;
+     
+      if(name == "")
+      {
+        isValid = false;
+        $("#item_name").closest(".form-group").addClass("has-error");
+      }
+     else
+      $("#item_name").closest(".form-group").removeClass("has-error");
+     
+      if(desc == "")
+      {
+        isValid = false;
+        $("#item_desc").closest(".form-group").addClass("has-error");
+      }
+     else
+      $("#item_desc").closest(".form-group").removeClass("has-error");
+     
+      if(!$.isNumeric(price))
+        {
+          toastr.error("Price must be a number");
+        }
+     
+      if(price == "")
+      {
+        isValid = false;
+        $("#item_price").closest(".form-group").addClass("has-error");
+      }
+     else
+      $("#item_price").closest(".form-group").removeClass("has-error");
+     
+     if(isValid)
      $.ajax({
              method: "POST",
               url: "/restaurants/add_item",
@@ -47,7 +79,7 @@ $(document).ready(function()
                     
                     $('#item_table tr:last').after('<tr><td>'+$("#item_name").val()+'</td><td>'+$("#item_desc").val()+'</td><td>'+$("#item_price").val()+'</td></tr>');
        
-       $("#item_name").val("")
+                    $("#item_name").val("")
                     $("#item_desc").val("");
                     $("#item_price").val("");
                   });
@@ -70,6 +102,7 @@ $(document).ready(function()
                         {
                           $("#"+v.row).text(v.capacity);
                           $("#"+v.row).css('background-color', 'greenyellow');
+                          $("#"+v.row).removeClass("can_add");
                           // $("#"+v.row).removeClass("table_view");
                           //  $("#"+v.row).addClass("table_taken col-md-2");
                         }
@@ -78,11 +111,11 @@ $(document).ready(function()
  })
 
 
-  $(document).on('click', '.table_view', function(){
+  $(document).on('click', '.can_add', function(){
     var box = $(this);
     
-    bootbox.prompt("Number of sets", function(result) {                
-        if(result != null)
+    bootbox.prompt("Enter number of seats", function(result) {                
+        if(result != null && $.isNumeric(result))
           {
             box.text(result);
             box.css('background-color', 'greenyellow');
@@ -94,7 +127,7 @@ $(document).ready(function()
                 })
                   .done(function( msg ) 
                   {
-                   
+                   box.removeClass("can_add");
                   });
           }
      });

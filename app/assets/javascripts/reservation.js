@@ -46,7 +46,12 @@
          toastr.error('Duration must be a number of hours you visit to last')
          isValid = false;
       }
-
+    
+    if($("#duration").val() <= 0)
+      {
+        isValid = false;
+        toastr.error("Must be a positive number");
+      }
     
      if(hours == "" || hours == null)
     {
