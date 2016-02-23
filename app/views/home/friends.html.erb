@@ -1,4 +1,40 @@
+<script>
+  $(document).ready(function(){
+    $(document).on('keyup', "#filter_friends", function () {
+        //split the current value of searchInput
+        var data = this.value.split(" ");
+        //create a jquery object of the rows
+        var jo = $("#fbody").find("tr");
+        if (this.value == "") {
+            jo.show();
+            return;
+        }
+        //hide all the rows
+        jo.hide();
 
+        //Recusively filter the jquery object to get results.
+        jo.filter(function (i, v) {
+            var $t = $(this);
+            for (var d = 0; d < data.length; ++d) {
+                if ($t.is(":contains('" + data[d] + "')")) {
+                    return true;
+                }
+            }
+            return false;
+        })
+        //show the rows that match.
+        .show();
+    }).focus(function () {
+        this.value = "";
+        $(this).css({
+            "color": "black"
+        });
+        $(this).unbind('focus');
+    }).css({
+        "color": "#C0C0C0"
+    });
+        });
+</script>
 
 <div class="container">
 <div class="row">
@@ -8,16 +44,17 @@
         <table class="table table-striped" id="friends_table_id">
     <thead>
       <tr>
-        <th>Email</th>
+         <th>Email</th>
         <th>First name</th>
         <th>Last name</th>
+       
           <th></th>
       </tr>
     </thead>
     <tbody>
         <% @my_friends.each do |u| %>
         <tr class="info">
-            <td><%= u.email %></td>
+          <td><%= u.email%></td>
           <td><%= u.firstname %></td>
           <td><%= u.lastname %></td>
             <td><button class="btn btn-danger dump_friend">Dump</button></td>
@@ -28,26 +65,26 @@
     </div>
     
     <div class="col-md-4 col-md-offset-2">
-        <h4>Find some new friends</h4>
         
-        <div class="col-md-6">
-            <input type="text">
+        <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Search" id="filter_friends">
         </div>
-        <div class="col-md-2">
-            <button class="btn btn-primary">Search</button>
-        </div>
+       
         
         <table class="table" id="user_table_id">
     <thead>
       <tr>
         <th>Email</th>
-        <th></th>
+        <th>First name</th>
+        <th>Last name</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="fbody">
       <% @future_friends.each do |u| %>
         <tr class="success">
-            <td><%= u.email %></td>
+          <td><%= u.email%></td>
+          <td><%= u.firstname %></td>
+          <td><%= u.lastname %></td>
             <td><button class="btn btn-success add_friend">Add friend</button></td>
         </tr>
         <% end %>

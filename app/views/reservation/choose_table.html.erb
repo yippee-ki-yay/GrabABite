@@ -27,16 +27,19 @@
                             $.each(msg, function(k, v) {
                              
                                  $("div").find("[data-id='" + v.table_id + "']").css('background-color', 'red');
-                                
+                                 $("div").find("[data-id='" + v.table_id + "']").removeClass("klik");
+                                 $("div").find("[data-id='" + v.table_id + "']").addClass("busy");
                             });
                           });
        
                   });
     
     
-  
+   $(document).on('click', '.busy', function(){
+     toastr.error("This table is already taken");
+   });
     
-      $(document).on('click', '.table_view_usr', function(){
+      $(document).on('click', '.klik', function(){
           var box = $(this);
           box.css('background-color', 'blue');
         
@@ -72,86 +75,86 @@
         <label>duration: <%= @visit.duration.strftime("%H:%M") %></label>
       </div>
       
-      <label>Select a table from the map which you wish to reserve</label>
+      <label>Select a table from the map which you wish to reserve, numbers represent the number of seats for that table</label>
     
     </div>
   </div>
   
    <div class="col-md-8 panel">
     <div class="col-md-8 table_grid">
-      <div data-id="" class="col-md-2 well table_view_usr" id="1">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="1">
       </div>
-      <div data-id="" data-id="" class="col-md-2 well table_view_usr" id="2">
+      <div data-id="" data-id="" class="col-md-2 well table_view_usr klik" id="2">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="3">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="3">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="4">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="4">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="5">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="5">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="6">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="6">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="7">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="7">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="8">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="8">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="9">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="9">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="10">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="10">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="11">
-      </div>
-      
-      <div data-id="" class="col-md-2 well table_view_usr" id="12">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="13">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="14">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="15">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="16">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="11">
       </div>
       
-      <div data-id="" class="col-md-2 well table_view_usr" id="17">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="12">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="18">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="13">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="19">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="14">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="20">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="15">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="21">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="22">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="23">
-      </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="24">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="16">
       </div>
       
-       <div data-id="" class="col-md-2 well table_view_usr" id="25">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="17">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="26">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="18">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="27">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="19">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="28">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="20">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="29">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="21">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="22">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="23">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="24">
       </div>
       
-      <div data-id="" class="col-md-2 well table_view_usr" id="30">
+       <div data-id="" class="col-md-2 well table_view_usr klik" id="25">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="31">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="26">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="32">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="27">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="33">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="28">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="34">
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="29">
       </div>
-      <div data-id="" class="col-md-2 well table_view_usr" id="35">
+      
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="30">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="31">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="32">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="33">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="34">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr klik" id="35">
       </div>
         </div>
       

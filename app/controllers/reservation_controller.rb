@@ -71,6 +71,7 @@ class ReservationController < ApplicationController
     
     visit = Visit.find(visit_id)
     
+    
     v = Invitation.new
     v.visit = visit
     v.user = User.find_by_email(user_email)
@@ -92,7 +93,6 @@ class ReservationController < ApplicationController
     rest_id = params[:restaurant_id]
     visit_id = params[:visit_id]
     
-    byebug
     vi = Visit.find(visit_id)
     
     @visits = Visit.where("restaurant_id = ?", rest_id)
@@ -108,7 +108,11 @@ class ReservationController < ApplicationController
         date = params[:date]
         duration = params[:duration]
         restaurant = params[:restaurant]
-        
+        min = params[:min]
+        hours = params[:hours]
+      
+       date = date + ' ' + hours + ':' + min
+
       
         @visit = Visit.new({start_date: date, duration: duration, restaurant_id:restaurant})
       @visit.end_date = @visit.start_date + duration.to_i.hours
@@ -125,7 +129,8 @@ class ReservationController < ApplicationController
     
     def friends_to_visit
       @visit = Visit.find(params[:id])
-      @friends = current_user.friends
+      @friends = current_user.friends - @visit.users
+      @added_friends = @visit.users
     end
     
 end

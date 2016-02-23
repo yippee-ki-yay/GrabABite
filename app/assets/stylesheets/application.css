@@ -21,8 +21,7 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 *= require rating
-*= require gridstack
-*= require jquery.gridster
+*= require toastr
 
 body{
     background: url(http://mymaplist.com/img/parallax/back.png);

@@ -3,7 +3,9 @@ class HomeController < ApplicationController
     before_action :authenticate_user!
     #ovde mozemo da prikazemo korisnikove informacije
     def index
-        
+         @visits =  Visit.joins(:invitations).where("invitations.user_id = ? AND 
+invitations.accepted = true", current_user.id )
+      @past = @visits.where("end_date < ?", Time.now)
     end
     
     #prikazemo podatke za editovanje profila

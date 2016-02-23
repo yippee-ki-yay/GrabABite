@@ -1,3 +1,54 @@
 
-
-<h1><%= current_user.firstname%> <%=current_user.lastname %> is here</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h3>All of the restaurant you and your friends have visited</h3>
+  </div>
+  
+  <div class="col-md-2 col-md-offset-2">
+      <%= link_to 'Restaurants', restaurants_reserve_home_index_path %>
+  </div>
+  
+   <div class="col-md-2 col-md-offset-5">
+       <%= link_to 'Friends', friends_home_index_path %>
+  </div>
+  
+  
+  <div class="col-md-8 col-md-offset-2">
+    
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th>Restaurant</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Table seats</th>
+        <th>Friends</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @past.each do |u| %>
+        <tr class="info">
+          <td><%= u.restaurant.name%></td>
+          <td><%= u.start_date.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= u.duration.strftime("%H:%M") %></td>
+          <td><%= u.table.capacity%></td>
+          
+          <td>
+            <% u.invitations.each do |k|%>
+              <% if k.accepted == true %>
+              <%= k.user.firstname + ' ' + k.user.lastname + ', '%>
+            <% end %>
+           <% end %>
+        </td>
+      <% if u.invitations.find_by_user_id(current_user.id).score == nil %>
+          <td><a href="<%= visit_done_reservation_index_path(visit_id: u.id)%>" class="btn btn-primary">Rate</a></td>
+        </tr>
+      <% else %>
+        <td>Score <%= u.invitations.find_by_user_id(current_user.id).score %></td>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+    </div>
+</div>

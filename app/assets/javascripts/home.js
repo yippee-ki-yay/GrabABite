@@ -3,6 +3,8 @@
               
              var row = $(this).closest("tr");
              var emailRow = row.find("td:nth-child(1)"); 
+             var firstname = row.find("td:nth-child(2)");
+           var lastname = row.find("td:nth-child(3)"); 
              
             $.ajax({
                   method: "POST",
@@ -14,9 +16,12 @@
                     if(msg == true)
                     {
                          row.hide();
-                        $('#user_table_id tr:last').after("<tr class='success''>"+'<td>'
-                                                          +emailRow.text()+'</td><td>' +
-                                                          "<button class='btn btn-success add_friend'>Add friend</button></td></tr>");
+                        $('#user_table_id tr:last').after(" <tr class='success'>"+
+            '<td>'+emailRow.text()+'</td>'+
+            '<td>'+firstname.text()+'</td>'+
+            '<td>'+lastname.text()+'</td>'+
+            "<td><button class='btn btn-success add_friend'>Add friend</button></tr>");
+                 
                     }
                   });
             
@@ -27,6 +32,8 @@
               
              var row = $(this).closest("tr");
              var emailRow = row.find("td:nth-child(1)"); 
+           var firstname = row.find("td:nth-child(2)");
+           var lastname = row.find("td:nth-child(3)"); 
              
             $.ajax({
                   method: "POST",
@@ -38,9 +45,12 @@
                     $('#friends_table_id tr:last')
                         .after(" <tr class='info'>"+
             '<td>'+emailRow.text()+'</td>'+
-            '<td>'+emailRow.text()+'</td>'+
-            '<td>'+emailRow.text()+'</td>'+
+            '<td>'+firstname.text()+'</td>'+
+            '<td>'+lastname.text()+'</td>'+
             "<td><button class='btn btn-danger dump_friend'>Dump</button></td></tr>");
+              
+              window.location.reload();
+              
                   });
             
         });

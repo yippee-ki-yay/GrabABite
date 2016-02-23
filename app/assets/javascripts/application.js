@@ -16,11 +16,8 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require_tree .
 //= require bootstrap-datepicker
-//= require jquery.gridster.js
 //= require twitter/typeahead.min
 //= require rating
 //= require moment
-//= requre gridstack
-//= require jquery.validate
-//= require jquery.validate.additional-methods
 //= bootbox
+//= toastr

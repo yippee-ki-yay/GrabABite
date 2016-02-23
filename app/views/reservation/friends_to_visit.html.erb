@@ -12,12 +12,14 @@
         <label>duration: <%= @visit.duration.strftime("%H:%M") %></label>
       </div>
       <div class="form-group">
-        <label>Table seats: <%= @visit.table.capacity %></label>
+        <label>Table seats: <b id="table_seats"><%= @visit.table.capacity %></b></label>
     </div>
       <div class="form-group">
         <label>People who are going: </label>
-        <ul>
-        <li id="user_list">You</li>
+        <ul id="friends_list">
+          <%@added_friends.each do |f| %>
+          <li><%= f.firstname + ' ' + f.lastname %></li>
+          <%end %>
         </ul>
       </div>
       
