@@ -54,3 +54,48 @@ $(document).ready(function()
   });
   
 });
+
+
+//loads table configuration
+ $(document).ready(function()
+{
+    $.ajax({
+             method: "POST",
+              url: "/reservation/get_tables"
+                })
+                  .done(function( msg ) 
+                  {
+                    $.each(msg, function(k, v) {
+                      if(v.row != null)
+                        {
+                          $("#"+v.row).text(v.capacity);
+                          $("#"+v.row).css('background-color', 'greenyellow');
+                          // $("#"+v.row).removeClass("table_view");
+                          //  $("#"+v.row).addClass("table_taken col-md-2");
+                        }
+                    });
+                  });
+ })
+
+
+  $(document).on('click', '.table_view', function(){
+    var box = $(this);
+    
+    bootbox.prompt("Number of sets", function(result) {                
+        if(result != null)
+          {
+            box.text(result);
+            box.css('background-color', 'greenyellow');
+            
+            $.ajax({
+             method: "POST",
+              url: "/restaurants/add_table",
+              data: "number_seats="+ result +"&row=" + box.attr("id")
+                })
+                  .done(function( msg ) 
+                  {
+                   
+                  });
+          }
+     });
+  });

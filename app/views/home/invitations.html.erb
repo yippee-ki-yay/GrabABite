@@ -31,7 +31,7 @@
               
 
               <button data-id="<%= inv.invitations.find_by_user_id(current_user.id).id %>" class="btn btn-success accept_invite" id="configuration">Accept</button>
-            <button data-id="<%= inv.invitations.first.id %>" class="btn btn-success decline_invite" id="configuration">Decline</button>
+            <button data-id="<%= inv.invitations.find_by_user_id(current_user.id).id %>" class="btn btn-success decline_invite" id="configuration">Decline</button>
 
           </div>
           <% end %>

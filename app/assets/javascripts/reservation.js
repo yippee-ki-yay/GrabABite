@@ -1,11 +1,5 @@
-$(function(){ //DOM Ready
 
-    $(".gridster ul").gridster({
-        widget_margins: [10, 10],
-        widget_base_dimensions: [140, 140]
-    }).data('gridster');
 
-});
 
 
   $(document).on("click", "#save_rating", function()
@@ -35,11 +29,11 @@ $(function(){ //DOM Ready
      $.ajax({
              method: "POST",
               url: "/reservation/create",
-              data: {date: d, duration: duration, table: table_id, restaurant: restaurant_id }
+              data: {date: d, duration: duration, restaurant: restaurant_id }
                 })
                   .done(function( msg ) 
                   {
-                   window.location.replace("/reservation/friends_to_visit?id=" + msg);
+                   window.location.replace("/reservation/choose_table?id=" + msg);
      });
   });
 

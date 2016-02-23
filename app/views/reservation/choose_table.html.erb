@@ -1,0 +1,161 @@
+<script>
+  $(document).ready(function(){
+     $.ajax({
+             method: "POST",
+              url: "/reservation/get_tables",
+              data:{rest_id:$("#restaurant_id").attr("val")}
+                })
+                  .done(function( msg ) 
+                  {
+                    $.each(msg, function(k, v) {
+                      if(v.row != null)
+                        {
+                          $("#"+v.row).text(v.capacity);
+                          $("#"+v.row).css('background-color', 'greenyellow');
+                          $("#"+v.row).attr("data-id", v.id);
+                        }
+                    });
+       
+       
+                   $.ajax({
+                     method: "POST",
+                      url: "/reservation/table_reserved",
+                      data:{restaurant_id:$("#restaurant_id").attr("val"), visit_id:$("#visit_id").attr("val")}
+                        })
+                          .done(function( msg ) 
+                          {
+                            $.each(msg, function(k, v) {
+                             
+                                 $("div").find("[data-id='" + v.table_id + "']").css('background-color', 'red');
+                                
+                            });
+                          });
+       
+                  });
+    
+    
+  
+    
+      $(document).on('click', '.table_view_usr', function(){
+          var box = $(this);
+          box.css('background-color', 'blue');
+        
+          var row = box.text();
+          var seats = box.attr("id");
+          //add table to current visit
+          $.ajax({
+             method: "POST",
+              url: "/reservation/table_to_visit",
+              data:{visit:$("#visit_id").attr("val"), table_id: box.data("id")}
+                })
+                  .done(function( msg ) 
+                  {
+                      window.location.replace("/reservation/friends_to_visit?id=" + msg);
+                   });
+      });
+  });
+</script>
+
+<div class="row">
+<div class="col-md-4">
+    <div class="well">
+      <input type="hidden" id="visit_id" val="<%= @visit.id %>">
+      <input type="hidden" id="restaurant_id" val="<%= @visit.restaurant.id %>">
+      <h3>Information about your reservation</h3>
+       <div class="form-group">
+         <label>Restaurant: <%= @visit.restaurant.name %></label>
+        </div>
+      <div class="form-group">
+        <label>Date: <%= @visit.start_date.strftime("%Y-%m-%d %H:%M") %></label>
+        </div>
+      <div class="form-group">
+        <label>duration: <%= @visit.duration.strftime("%H:%M") %></label>
+      </div>
+      
+      <label>Select a table from the map which you wish to reserve</label>
+    
+    </div>
+  </div>
+  
+   <div class="col-md-8 panel">
+    <div class="col-md-8 table_grid">
+      <div data-id="" class="col-md-2 well table_view_usr" id="1">
+      </div>
+      <div data-id="" data-id="" class="col-md-2 well table_view_usr" id="2">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="3">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="4">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="5">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="6">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="7">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="8">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="9">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="10">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="11">
+      </div>
+      
+      <div data-id="" class="col-md-2 well table_view_usr" id="12">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="13">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="14">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="15">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="16">
+      </div>
+      
+      <div data-id="" class="col-md-2 well table_view_usr" id="17">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="18">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="19">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="20">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="21">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="22">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="23">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="24">
+      </div>
+      
+       <div data-id="" class="col-md-2 well table_view_usr" id="25">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="26">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="27">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="28">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="29">
+      </div>
+      
+      <div data-id="" class="col-md-2 well table_view_usr" id="30">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="31">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="32">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="33">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="34">
+      </div>
+      <div data-id="" class="col-md-2 well table_view_usr" id="35">
+      </div>
+        </div>
+      
+    
+   
+</div>
+</div>

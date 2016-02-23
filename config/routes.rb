@@ -41,11 +41,15 @@ Rails.application.routes.draw do
     resources :reservation do
         collection do
             get 'friends_to_visit'
+          get 'choose_table'
+          post 'table_to_visit'
           post 'create'
           post 'invite_friend'
           get 'visit_done'
           post 'rate_visit'
           post 'is_reserved'
+          post 'get_tables'
+          post 'table_reserved'
         end
     end
     

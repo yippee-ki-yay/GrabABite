@@ -15,12 +15,14 @@
  *= require_self
  */
 *= require bootstrap-datepicker3
-*= require jquery.gridster.css
 *= require bootstrap
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
 *= require rating
+*= require gridstack
+*= require jquery.gridster
 
 body{
     background: url(http://mymaplist.com/img/parallax/back.png);
@@ -30,4 +32,36 @@ body{
 
 .vertical-offset-100{
     padding-top:50px;
+}
+
+.table_taken
+{
+  height:60px;
+  width:55px;
+  margin-right: 8px;
+  background-color: greenyellow;
+}
+
+.box_table
+{
+  color: bisque;
+  width: 30px;
+  height: 30px;
+  border-color: black;
+}
+
+.table_view
+{
+  height:60px;
+  width:60px;
+  margin-right: 8px;
+  background-color: bisque;
+}
+
+.table_view_usr
+{
+  height:60px;
+  width:60px;
+  margin-right: 8px;
+  background-color: bisque;
 }

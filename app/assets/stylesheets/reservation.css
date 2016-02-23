@@ -1,0 +1,21 @@
+.demo {
+   
+    background: #004756;
+}
+
+.gridster ul {
+    list-style: none;
+    background-color: gray;
+}
+
+
+.gridster .gs_w {
+    background: #FFF;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.gridster ul li {
+    background-color: red;
+}

@@ -45,9 +45,11 @@ class RestaurantsController < ApplicationController
   # post adds a new table to the restaurant
   def add_table
     seats = params[:number_seats]
+    row = params[:row]
     if current_user.has_role? "restaurant_manager"
         table = Table.new
         table.capacity = seats
+      table.row = row
         table.save
     
       curr_restaurant = current_user.restaurant

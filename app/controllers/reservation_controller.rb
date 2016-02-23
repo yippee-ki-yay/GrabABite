@@ -31,7 +31,38 @@ class ReservationController < ApplicationController
     
   end
   
-  def is_reserved
+  
+  def get_tables
+    
+    rest_id = params[:rest_id]
+    r = Restaurant.find(rest_id)
+    
+    if current_user.has_role? "restaurant_manager"
+      r = Restaurant.find(current_user.restaurant_id)
+    end
+    
+    respond_to do |format|
+      format.json { render :json => r.tables }
+     end
+    
+  end
+  
+  def choose_table
+     @visit = Visit.find(params[:id])
+  end
+  
+  #adds a table to visit
+  def table_to_visit
+    visit = params[:visit]
+    table_id = params[:table_id]
+    
+    
+    v = Visit.find(visit)
+    v.table_id = table_id
+    v.save
+    
+    render json: v.id
+    
   end
   
   def invite_friend
@@ -56,16 +87,30 @@ class ReservationController < ApplicationController
     
   end
   
+  #gets all the tables that are reserved for a given restaurant and time
+  def table_reserved
+    rest_id = params[:restaurant_id]
+    visit_id = params[:visit_id]
+    
+    byebug
+    vi = Visit.find(visit_id)
+    
+    @visits = Visit.where("restaurant_id = ?", rest_id)
+    @visits = @visits.where("(end_date > ? and end_date < ?) or (start_date > ? and start_date < ?)", 
+      vi.start_date, vi.end_date, vi.start_date, vi.end_date)
+    
+    render json: @visits
+    
+  end
+  
     #we save to database restaurant visit/reservation
     def create
         date = params[:date]
         duration = params[:duration]
-        table = params[:table]
         restaurant = params[:restaurant]
         
       
-        @visit = Visit.new({start_date: date, duration: duration, table_id:table, restaurant_id:restaurant})
-      byebug
+        @visit = Visit.new({start_date: date, duration: duration, restaurant_id:restaurant})
       @visit.end_date = @visit.start_date + duration.to_i.hours
         @visit.save
       
