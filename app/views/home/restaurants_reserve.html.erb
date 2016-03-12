@@ -10,6 +10,8 @@
             <th>Name</th>
             <th>Description</th>
             <th>Address</th>
+            <th>Rating</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +20,11 @@
                 <td><%= u.name %></td>
                 <td><%= u.desc %></td>
                 <td><%= u.address %></td>
+              <% if u.score == nil and u.num_rates == nil %>
+                <td>None</td>
+              <% else %>
+              <td><%= u.score/u.num_rates %></td>
+              <% end %>
                 <% resrv =  "/reservation?id=" + u.id.to_s %>
                 <td><a href="<%= resrv%>" class="btn btn-success reserve">Reserve</a></td>
             </tr>

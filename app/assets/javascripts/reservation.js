@@ -6,10 +6,19 @@
   {
     var rating = $('input[name=example]:checked', '#rating').val();
     var inv = $(this).attr("data-id");
+    var isValid = true;
+    
+    if(rating == undefined)
+      {
+        toastr.error("Rate the visit")
+        isValid = false;
+      }
+    
+    if(isValid)
       $.ajax({
              method: "POST",
               url: "/reservation/rate_visit",
-              data: {rating: rating, inv: inv }
+              data: {rating: rating, inv: inv, rest_id:$("#restaurant_id").attr("val") }
                 })
                   .done(function( msg ) 
                   {

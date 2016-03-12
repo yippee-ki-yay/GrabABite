@@ -37,8 +37,8 @@ invitations.accepted = true", current_user.id )
   
     def invitations
       @invitations =  Visit.joins(:invitations).where("invitations.user_id = ? AND 
-invitations.accepted = false", current_user.id )
-      
+invitations.accepted = false AND start_date > ?", current_user.id, DateTime.now )
+    
     end
     
     #upravljas i dodajes frendove
@@ -48,6 +48,7 @@ invitations.accepted = false", current_user.id )
         @my_friends = current_user.friends
         @future_friends = @all_users - current_user.friends
         @future_friends.delete(current_user)
+      @future_friends = ((@future_friends - User.with_role("system_manager")) - User.with_role("restaurant_manager"))
     end
     
     def add_friend

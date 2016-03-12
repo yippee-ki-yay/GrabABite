@@ -47,9 +47,10 @@ class RestaurantsController < ApplicationController
     
     
     item = Item.new({name: name, desc: desc, price: price})
-    item.save
-    
-    current_user.restaurant.items.push item
+    item.with_lock do
+      item.save
+      current_user.restaurant.items.push item
+    end
     
     render json: true
     
@@ -61,17 +62,20 @@ class RestaurantsController < ApplicationController
     row = params[:row]
     if current_user.has_role? "restaurant_manager"
         table = Table.new
-        table.capacity = seats
-      table.row = row
-        table.save
-    
-      curr_restaurant = current_user.restaurant
-      curr_restaurant.tables.push table
+      
+      table.with_lock do
+          table.capacity = seats
+          table.row = row
+          table.save
+
+          curr_restaurant = current_user.restaurant
+          curr_restaurant.tables.push table
+      end
       
       render json: true
       
     else
-      redner json: false
+      render json: false
     end
     
     

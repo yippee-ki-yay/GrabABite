@@ -54,6 +54,11 @@
                 })
                   .done(function( msg ) 
                   {
+                      if(msg == false)
+                        {
+                          window.location.reload();
+                        }else
+                          
                       window.location.replace("/reservation/friends_to_visit?id=" + msg);
                    });
       });
